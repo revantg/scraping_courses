@@ -8,7 +8,7 @@ from scrapy.utils.log import configure_logging
 class FreetutorialsSpider(scrapy.Spider):
     name = 'freetutorials'
     # allowed_domains = ['www.freetutorials.us']
-    start_urls = ['https://www.freecoursesonline.me/']
+    start_urls = ['http://www.freetutorials.us/']
 
     configure_logging(install_root_handler=False)
     logging.basicConfig(
@@ -119,7 +119,7 @@ class FreetutorialsSpider(scrapy.Spider):
         # }
 
     def parse(self, response):
-        url = "https://www.freecoursesonline.me/page/"
+        url = "https://www.freetutorials.us/page/"
         for i in range(1, 85):
             page_url = url + str(i)
             yield scrapy.Request(page_url, callback=self.parse_page)
