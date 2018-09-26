@@ -1,0 +1,46 @@
+[
+    {
+        "course_title": "Git a Web Developer Job: Mastering the Modern Workflow",
+        "course_views": "38,406",
+        "course_img": "https://udemy-images.udemy.com/course/240x135/818990_57c0_3.jpg",
+        "course_desc": "Learn Git, GitHub, Node.js, NPM, Object-oriented JavaScript, ES6, webpack, Gulp, BEM and Job Interview Tips",
+        "course_tags": "BEM",
+        "course_link": "https://www.freetutorials.us/git-a-web-developer-job-mastering-the-modern-workflow-udemy-free-download-1/",
+        "course_published": {
+            "datetime-object": "2017-12-18 13:32:47",
+            "formatted_date": "18 December 2017",
+            "formatted_time": "13:32:47",
+            "formatted_date_time": "18 December 2017 13:32:47",
+            "iso_string": "2017-12-18T13:32:47+00:00"
+        },
+        "course_updated": {
+            "datetime-object": "2018-06-26 15:53:13",
+            "formatted_date": "26 June 2018",
+            "formatted_time": "15:53:13",
+            "formatted_date_time": "26 June 2018 15:53:13",
+            "iso_string": "2018-06-26T15:53:13+00:00"
+        },
+        "course_size": "2.68GB",
+        "course_category": "Development",
+        "course_download_link": "https://www.freetutorials.us/wp-content/uploads/2017/12/FreeTutorials.Us-Udemy-git-a-web-developer-job-mastering-the-modern-workflow.torrent",
+        "related_posts": [
+            [
+                "React JS \u2013 Mastering Redux",
+                "https://www.freetutorials.us/react-js-mastering-redux-1/"
+            ],
+            [
+                "The Complete JavaScript Course \u2013 Beginner to Professional",
+                "https://www.freetutorials.us/the-complete-javascript-course-beginner-to-professional-3/"
+            ],
+            [
+                "Node.js: The Complete Guide to Build RESTful APIs (2018)",
+                "https://www.freetutorials.us/node-js-the-complete-guide-to-build-restful-apis-2018/"
+            ],
+            [
+                "Complete Git and GitHub Masterclass : Beginner to Git Expert",
+                "https://www.freetutorials.us/complete-git-and-github-masterclass-beginner-to-git-expert-1/"
+            ]
+        ],
+        "udemy_link": "https://www.udemy.com/git-a-web-developer-job-mastering-the-modern-workflow/"
+    }
+]

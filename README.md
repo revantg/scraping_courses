@@ -1,4 +1,6 @@
 
+
+
 # Scrapy Spider
 
 **This scrapy spider was used to quickly scrape information and download links of around 900+ paid courses from the course website https://freetutorials.us worth more than $ 9000 .
@@ -188,4 +190,32 @@ ITEM_PIPELINES  =  {
 }
 ```
 
+## Scope
+Currently the download links are provided in format of 
+```
+https://www.freetutorials.us/wp-content/uploads/2017/12/FreeTutorials.Us-Udemy-git-a-web-developer-job-mastering-the-modern-workflow.torrent
+```
+or
+```
+magnet:?xt=urn:btih:E8C7F34A681DB443FA0CEACD14B6E8F66B8F8CE3&dn=%5bFreeTutorials.Us%5d%20Udemy%20-%20ethereum-masterclass&tr=udp%3a%2f%2f62.138.0.158%3a6969%2fannounce&tr=udp%3a%2f%2f87.233.192.220%3a6969%2fannounce&tr=udp%3a%2f%2f151.80.120.115%3a2710%2fannounce&tr=udp%3a%2f%2f163.172.81.35%3a1337%2fannounce&tr=http%3a%2f%2f163.172.81.35%3a1337%2fannounce&tr=udp%3a%2f%2f185.82.217.160%3a1337%2fannounce&tr=http%3a%2f%2f185.82.217.160%3a1337%2fannounce&tr=udp%3a%2f%2f211.149.236.45%3a6969%2fannounce&tr=udp%3a%2f%2f109.236.91.32%3a6969%2fannounce&tr=udp%3a%2f%2f83.208.197.185%3a1337%2fannounce&tr=udp%3a%2f%2f51.15.4.13%3a1337%2fannounce&tr=http%3a%2f%2f51.15.4.13%3a1337%2fannounce&tr=udp%3a%2f%2f198.54.117.212%3a1337%2fannounce&tr=udp%3a%2f%2f82.45.40.204%3a1337%2fannounce&tr=udp%3a%2f%2f123.249.16.65%3a2710%2fannounce&tr=udp%3a%2f%2f5.226.21.164%3a6969%2fannounce&tr=udp%3a%2f%2f210.244.71.25%3a6969%2fannounce&tr=udp%3a%2f%2f78.142.19.42%3a1337%2fannounce&tr=udp%3a%2f%2f191.96.249.23%3a6969%2fannounce&tr=udp%3a%2f%2f92.241.171.245%3a6969%2fannounce
+```
+
+All the ``http`` links can be converted into ``magnet`` links by the following simple script
+```python
+def torrent2magnet(self, torrent):
+
+    session = libtorrent.session()  # noqa
+    info = libtorrent.torrent_info(sys.argv[1])
+
+    params = [
+        ("dn", info.name()),
+    ]
+    params.extend(("tr", tr.url) for tr in info.trackers())
+
+    magnet = "magnet:?xt=urn:btih:{}&{}".format(
+        info.info_hash(),
+        urlencode(params),
+    )
+    return magnet
+```
 

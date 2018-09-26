@@ -31,7 +31,6 @@ class CoursesPipeline(object):
     #         info.info_hash(),
     #         urlencode(params),
     #     )
-
     #     return magnet
 
     def process_time(self, isostring):
@@ -51,7 +50,7 @@ class CoursesPipeline(object):
         return a_dict
 
     def process_item(self, item, spider):
-        if item["course_title"]         : item['course_title'] = item['course_title'][0]
+        if item["course_title"]         : item  ['course_title'] = item['course_title'][0]
         if item["course_views"]         : item['course_views'] = item['course_views'][0]
         if item["course_img"]           : item['course_img'] = item['course_img'][0]
         if item["course_desc"]          : item['course_desc'] = item['course_desc'][0]
