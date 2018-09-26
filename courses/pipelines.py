@@ -7,13 +7,32 @@
 
 import datetime
 import dateutil.parser
-
+import sys
+# import libtorrent
+from urllib.parse import urlencode
 
 # def getDateTimeFromISO8601String(s):
 #     d = dateutil.parser.parse(s)
 #     return d
 
 class CoursesPipeline(object):
+
+    # def torrent2magnet(self, torrent):
+
+    #     session = libtorrent.session()  # noqa
+    #     info = libtorrent.torrent_info(sys.argv[1])
+
+    #     params = [
+    #         ("dn", info.name()),
+    #     ]
+    #     params.extend(("tr", tr.url) for tr in info.trackers())
+
+    #     magnet = "magnet:?xt=urn:btih:{}&{}".format(
+    #         info.info_hash(),
+    #         urlencode(params),
+    #     )
+
+    #     return magnet
 
     def process_time(self, isostring):
         a = isostring
@@ -37,18 +56,23 @@ class CoursesPipeline(object):
         if item["course_img"]           : item['course_img'] = item['course_img'][0]
         if item["course_desc"]          : item['course_desc'] = item['course_desc'][0]
         if item["course_tags"]          : item['course_tags'] = item['course_tags'][0]
-        if item["course_published"]     : item['course_published'] = item['course_published'][0]
-        if item["course_updated"]       : item['course_updated'] = item['course_updated'][0]
-        if item["course_size"]          : item['course_size'] = item['course_size'][0]
         if item["course_link"]          : item['course_link'] = item['course_link'][0]
         if item["course_category"]      : item['course_category'] = item['course_category'][0]
         if item["course_download_link"] : item['course_download_link'] = item['course_download_link'][0]
-        # if item["related_posts"]        : item['related_posts'] = item['related_posts'][0]
         if item["udemy_link"]           : item['udemy_link'] = item['udemy_link'][0]
-        
-        item['course_published'] = self.process_time(item['course_published'])
-        item['course_updated'] = self.process_time(item['course_updated'])
+        # if item["related_posts"]        : item['related_posts'] = item['related_posts'][0]
 
-        item['course_size'] = item['course_size'].upper().replace('Size: ', '').replace('G', 'GB').replace('M', 'MB')
+        if item["course_size"] : 
+            item['course_size'] = item['course_size'][0]    
+            item['course_size'] = item['course_size'].upper().replace('SIZE: ', '').replace('G', 'GB').replace('M', 'MB')
+
+        if item["course_published"]: 
+            item['course_published'] = item['course_published'][0]
+            item['course_published'] = self.process_time(item['course_published'])
+       
+        if item["course_updated"] : 
+            item['course_updated'] = item['course_updated'][0]
+            item['course_updated'] = self.process_time(item['course_updated'])
+
         return item
 

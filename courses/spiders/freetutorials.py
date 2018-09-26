@@ -2,21 +2,27 @@
 import scrapy
 from courses.items import CoursesDetails
 from scrapy.loader import ItemLoader
+import logging  
+from scrapy.utils.log import configure_logging
 
 class FreetutorialsSpider(scrapy.Spider):
     name = 'freetutorials'
     # allowed_domains = ['www.freetutorials.us']
-    start_urls = ['http://www.freetutorials.us/']
+    start_urls = ['https://www.freecoursesonline.me/']
+
+    configure_logging(install_root_handler=False)
+    logging.basicConfig(
+        filename='log_final.txt',
+        format='%(levelname)s: %(message)s',
+        level=logging.INFO
+    )
 
     def parse_page(self, response):
         course_pg_links = response.xpath("//*[@class = 'entry-title post-title']")
-        k = 1
         for i in course_pg_links:
             course_link = i.xpath("./a/@href").extract_first()
             yield scrapy.Request(course_link, callback=self.parse_course)
             print(course_link)
-            # if k == 2: break
-            # k = 2
 
     def parse_course(self, response):
 
@@ -81,19 +87,19 @@ class FreetutorialsSpider(scrapy.Spider):
         else:
             udemy_link = "Not Found"
 
-        l.add_value('course_title', course_title)
-        l.add_value('course_views', course_views)
-        l.add_value('course_img', course_img)
-        l.add_value('course_desc', course_desc)
-        l.add_value('course_tags', course_tags)
-        l.add_value('course_link', course_link)
-        l.add_value('course_published', course_published)
-        l.add_value('course_updated', course_updated)
-        l.add_value('course_size', course_size)
-        l.add_value('course_category', course_category)
-        l.add_value('course_download_link', course_download_link)
-        l.add_value('related_posts', related_posts)
-        l.add_value('udemy_link', udemy_link)
+        if course_title: l.add_value('course_title', course_title)
+        if course_views: l.add_value('course_views', course_views)
+        if course_img: l.add_value('course_img', course_img)
+        if course_desc: l.add_value('course_desc', course_desc)
+        if course_tags: l.add_value('course_tags', course_tags)
+        if course_link: l.add_value('course_link', course_link)
+        if course_published: l.add_value('course_published', course_published)
+        if course_updated: l.add_value('course_updated', course_updated)
+        if course_size: l.add_value('course_size', course_size)
+        if course_category: l.add_value('course_category', course_category)
+        if course_download_link: l.add_value('course_download_link', course_download_link)
+        if related_posts: l.add_value('related_posts', related_posts)
+        if udemy_link: l.add_value('udemy_link', udemy_link)
 
         yield l.load_item()
         # yield {
@@ -111,13 +117,9 @@ class FreetutorialsSpider(scrapy.Spider):
             # "related_posts" : related_posts,
             # "udemy_link" : udemy_link
         # }
-        
-
-
 
     def parse(self, response):
-        url = "https://www.freetutorials.us/page/"
+        url = "https://www.freecoursesonline.me/page/"
         for i in range(1, 85):
             page_url = url + str(i)
             yield scrapy.Request(page_url, callback=self.parse_page)
-            break
