@@ -52,7 +52,7 @@ class FreetutorialsSpider(scrapy.Spider):
         #         course_updated = response.xpath("//*[contains(text(), 'Last Updated')]/child::node()").extract_first()
         #     if course_updated:
         #         course_updated = course_updated.lower().replace("last updated", "").upper()
-        #     else:
+    #     else:
         #         course_updated = "NOT FOUND"
 
         course_size = response.xpath("//*[contains(text(), 'Size')]/child::node()").extract_first()
